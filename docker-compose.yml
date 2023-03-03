@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+
+  database:
+    image: mysql:8.0-debian
+    container_name: database
+    restart: always
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./docker/mysql:/var/lib/mysql
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+      MYSQL_PORT: 3306
+    networks:
+      - rest-server
+
+  phpmyadmin:
+    container_name: phpmyadmin
+    image: phpmyadmin
+    restart: always
+    ports:
+      - "8080:80"
+    depends_on:
+      - database
+    environment:
+      PMA_HOST: database
+    networks:
+      - rest-server
+
+  php-apache:
+    build: ./docker/php
+    container_name: web-server
+    restart: always
+    ports:
+      - "9000:80"
+    volumes:
+      - ./:/var/www
+      - ./docker/php/vhost.conf:/etc/apache2/sites-enabled/vhost.conf
+    networks:
+      - rest-server
+
+networks:
+  rest-server:
