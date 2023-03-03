@@ -44,7 +44,7 @@ composer install
 
 Make the required configuration changes in the .env file :
 
-> DATABASE_URL="mysql://username:password@127.0.0.1:3306/sandbox_symfony?serverVersion=8.0&charset=utf8"
+> DATABASE_URL="mysql://username:password@127.0.0.1:3306/rest_server?serverVersion=8.0&charset=utf8"
 
 Run the database migrations :
 
@@ -76,7 +76,7 @@ docker exec web-server composer install
 Make the required configuration changes in the .env file :
 
 ```bash
-DATABASE_URL="mysql://root:@database:3306/rest_symfony?serverVersion=8.0&charset=utf8"
+DATABASE_URL="mysql://username:password@127.0.0.1:3306/rest_server?serverVersion=8.0&charset=utf8"
 ```
 
 Run the database migrations :
